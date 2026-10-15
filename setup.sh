@@ -59,7 +59,11 @@
 	echo "" >> ~/.bashrc
 	echo ". /home/masonp/home-server-config/bashrc" >> ~/.bashrc
     
-
+# Neovim
+    cd
+    gitClone neovim-config
+    cd neovim-config
+    ./setup.sh
 
 # Blocky & Unbound
 	sudo ss -tuln
