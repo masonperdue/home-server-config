@@ -54,8 +54,10 @@
     sudo usermod -aG scanner masonp
 
 # BASH
+	cd
+	git clone git@github.com:masonperdue/home-server-config.git
 	echo "" >> ~/.bashrc
-	echo ". /home/masonp/raspi-config/mybashrc" >> ~/.bashrc
+	echo ". /home/masonp/home-server-config/bashrc" >> ~/.bashrc
     
 
 

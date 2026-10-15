@@ -19,7 +19,7 @@ PS1='\[\e[36m\]\u\[\e[94m\]@\h\[\e[93m\]:\w\[\e[0m\] ${PS1_GIT_INFO}\n  \[\e[31m
 export EDITOR='nvim'
 
 # Aliases
-alias editBash="nvim ~/.bashrc"
+alias editBash="nvim ~/home-server-config/bashrc"
 alias ls='ls --color=auto'
 alias ll='ls -lA'
 alias la='ls -A'
@@ -37,17 +37,17 @@ alias tree='tree -lC --dirsfirst'
 alias trea='tree -alC --dirsfirst'
 
 # Functions
-updateRaspi(){
+updateServer(){
         echo ""
         echo "Updating Packages"
         sudo apt update
-        sudo apt full-upgrade -y
+        sudo apt upgrade -y
         sudo apt autoremove -y --purge
         sudo apt autoclean
         echo ""
         
         echo "Sourcing ~/.bashrc"
-        cd ~/raspi-config
+        cd ~/home-server-config
         git pull
         source ~/.bashrc
         cd -
