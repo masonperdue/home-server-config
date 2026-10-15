@@ -2,60 +2,61 @@
 ## DO NOT RUN ##
 
 ## Install
-  # Mason Perdue
-  # masonp
-  # server
-  # masonperdue.com
-  # Root on SSD, /home on HDD
-  # Set static IP and 1.1.1.3 DNS by router
+    # Mason Perdue
+    # masonp
+    # server
+    # masonperdue.com
+    # Root on SSD, /home on HDD
+    # Set static IP and 1.1.1.3 DNS by router
 
 ## Headful boot
-  sudo apt update
-  sudo apt upgrade -y
-  sudo apt autoremove --purge -y
-  sudo apt autoclean
-  sudo apt install -y openssh-server
-  sudo shutdown now
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt autoremove --purge -y
+    sudo apt autoclean
+    sudo apt install -y openssh-server
+    sudo shutdown now
 
 ## Headless Boot
-  ssh -A masonp@192.168.50.10
-  mkdir ~/.ssh
-  nano ~/.ssh/authorized_keys
-    # Paste public key
-  chmod 600 ~/.ssh/authorized_keys
-  sudoedit /etc/ssh/sshd_config
-    # change to "Port 7583"
-    # change to "PermitRootLogin no"
-    # change to "PubkeyAuthentication yes"
-    # change to "AuthorizedKeysFile .ssh/authorized_keys"
-    # change to "PasswordAuthentication no"
-    # change to "X11Forwarding no"
-    # add "AllowUsers masonp"
-  sudo reboot now
-  rm ~/.ssh/known_hosts*
-  nvim ~/.ssh/config
+    ssh -A masonp@192.168.50.10
+    mkdir ~/.ssh
+    nano ~/.ssh/authorized_keys
+        # Paste public key
+    chmod 600 ~/.ssh/authorized_keys
+    sudoedit /etc/ssh/sshd_config
+        # change to "Port 7583"
+        # change to "PermitRootLogin no"
+        # change to "PubkeyAuthentication yes"
+        # change to "AuthorizedKeysFile .ssh/authorized_keys"
+        # change to "PasswordAuthentication no"
+        # change to "X11Forwarding no"
+        # add "AllowUsers masonp"
+    sudo reboot now
+    rm ~/.ssh/known_hosts*
+    nvim ~/.ssh/config
     # Host server
       # HostName 192.168.50.10
       # User masonp
       # Port 7583
-  ssh -A server
-  sudo rm /etc/motd
-  sudo apt install -y git tree sane-utils nmap dnsutils imagemagick neovim
-  nvim ~/.ssh/id_ed25519-GitHub.pub
-  chmod 600 ~/.ssh/id_ed25519-GitHub.pub
-	git config --global user.name masonperdue
-  git config --global user.email 220426478+masonperdue@users.noreply.github.com
-  git config --global core.editor nvim
-  git config --global init.defaultBranch main
-  git config --global commit.gpgSign true
-  git config --global tag.gpgSign true
-  git config --global gpg.format ssh
-  git config --global user.signingkey ~/.ssh/id_ed25519-GitHub.pub
-  sudo usermod -aG scanner masonp
+    ssh -A server
+    sudo rm /etc/motd
+    sudo apt install -y git tree sane-utils nmap dnsutils imagemagick neovim
+    nvim ~/.ssh/id_ed25519-GitHub.pub
+    chmod 600 ~/.ssh/id_ed25519-GitHub.pub
+    git config --global user.name masonperdue
+    git config --global user.email 220426478+masonperdue@users.noreply.github.com
+    git config --global core.editor nvim
+    git config --global init.defaultBranch main
+    git config --global commit.gpgSign true
+    git config --global tag.gpgSign true
+    git config --global gpg.format ssh
+    git config --global user.signingkey ~/.ssh/id_ed25519-GitHub.pub
+    sudo usermod -aG scanner masonp
 
 # BASH
-  
-
+	echo "" >> ~/.bashrc
+	echo ". /home/masonp/raspi-config/mybashrc" >> ~/.bashrc
+    
 
 
 # Blocky & Unbound
