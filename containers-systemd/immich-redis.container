@@ -10,3 +10,4 @@ AutoUpdate=registry
 
 [Service]
 Restart=always
+RestartSec=1s

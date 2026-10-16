@@ -44,7 +44,7 @@
       # Port 7583
     ssh -A server
     sudo rm /etc/motd
-    sudo apt install -y git tree sane-utils nmap dnsutils imagemagick neovim curl
+    sudo apt install -y git tree sane-utils nmap dnsutils imagemagick neovim curl htop
     nvim ~/.ssh/id_ed25519-GitHub.pub
     chmod 600 ~/.ssh/id_ed25519-GitHub.pub
     git config --global user.name masonperdue
