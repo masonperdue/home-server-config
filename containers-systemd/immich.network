@@ -1,2 +1,3 @@
 [Network]
 NetworkName=immich
+IPRange=192.168.40.256/24

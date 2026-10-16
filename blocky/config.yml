@@ -90,7 +90,9 @@ rateLimit:
     burst: 200
 
 ports:
-    dns: 53
+    dns:
+        - 127.0.0.1:53
+        - 192.168.50.10:53
 
 ede:
     enable: true

@@ -124,8 +124,8 @@
     mkdir ~/.volumes/immich/{photos,immich-ml-cache,immich-db-data,immich-redis-data}
     printf '%s' 'YOUR_PW' | podman secret create immich_db_pw -
     systemctl --user daemon-reload
-    systemctl --user start immich-server.service
-    # systemctl --user status immich-server.service
+    systemctl --user start immich.service
+    # systemctl --user status immich.service
     # http://192.168.50.10:2283
     # Install Immich TV (Unofficial) by GJ Compagner from Play Store on TV
     # Get API Key from Immich website to sign into to TV app
