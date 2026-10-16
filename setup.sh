@@ -1,6 +1,10 @@
 
 ## DO NOT RUN ##
 
+## Backup
+    # Remove Cloudflare API Token from caddy.container
+    # Remove Immich DB Password from immich-db.container and immich.container
+
 ## Install
     # Mason Perdue
     # masonp
@@ -40,7 +44,7 @@
       # Port 7583
     ssh -A server
     sudo rm /etc/motd
-    sudo apt install -y git tree sane-utils nmap dnsutils imagemagick neovim
+    sudo apt install -y git tree sane-utils nmap dnsutils imagemagick neovim curl
     nvim ~/.ssh/id_ed25519-GitHub.pub
     chmod 600 ~/.ssh/id_ed25519-GitHub.pub
     git config --global user.name masonperdue
@@ -53,19 +57,19 @@
     git config --global user.signingkey ~/.ssh/id_ed25519-GitHub.pub
     sudo usermod -aG scanner masonp
 
-# BASH
+## BASH
 	cd
 	git clone git@github.com:masonperdue/home-server-config.git
 	echo "" >> ~/.bashrc
 	echo ". /home/masonp/home-server-config/bashrc" >> ~/.bashrc
     
-# Neovim
+## Neovim
     cd
     gitClone neovim-config
     cd neovim-config
     ./setup.sh
 
-# Blocky & Unbound
+## Blocky & Unbound
     sudo systemctl disable --now avahi-daemon.{service,socket}
     sudo systemctl mask avahi-daemon.{service,socket}
 	sudo ss -tuln
@@ -108,11 +112,42 @@
 	sudo systemctl restart systemd-journald
     sudo reboot now
 
-# Firewalld
+## Caddy
+    mkdir ~/.volumes/caddy/{site,data,config}
+    ln -sf ~/home-server-config/Caddyfile ~/.volumes/caddy/Caddyfile
+    printf '%s' 'YOUR_TOKEN' | podman secret create cloudflare_api_token -
+    systemctl --user daemon-reload
+    systemctl --user start caddy.service
+    # podman exec -it caddy caddy reload --config /etc/caddy/Caddyfile
+
+## Immich
+    mkdir ~/.config/containers/systemd/immich
+    cd 
+    touch ~/.config/containers/systemd/immich/{immich-network.network,immich-db.container,immich-redis.container,immich-ml.container,immich-server.container}
+    mkdir ~/.volumes/immich/{photos,immich-ml-cache,immich-db-data,immich-redis-data}
+    systemctl --user daemon-reload
+    loginctl enable-linger masonp
+    systemctl --user start immich-server.service
+    systemctl --user enable --now podman-auto-update.timer
+    # systemctl --user status immich-server.service
+    # http://192.168.50.20:2283
+    # Install Immich TV (Unofficial) by GJ Compagner from Play Store on TV
+    # Get API Key from Immich website to sign into to TV app
+    # Turn on developer options and wireless debugging on Google TV
+    sudo apt install -y adb
+    adb connect YOUR_TV_IP_ADDRESS
+    adb shell settings put secure screensaver_components nl.giejay.android.tv.immich/.screensaver.ScreenSaverService
+    adb shell settings put secure screensaver_enabled 1
+    adb shell settings put system screen_off_timeout 60000
+    adb shell settings get secure screensaver_components
+    # adb shell dumpsys deviceidle whitelist +nl.giejay.android.tv.immich
+    # adb shell cmd appops set nl.giejay.android.tv.immich RUN_IN_BACKGROUND allow
+
+## Firewalld
     sudo apt install -y firewalld
     sudo systemctl status firewalld.service
     sudo firewall-cmd --set-default-zone drop
-    sudo firewall-cmd --zone=drop --add-port=7583/tcp --add-port=53/tcp --add-port=53/udp
+    sudo firewall-cmd --zone=drop --add-port=7583/tcp --add-port=53/tcp --add-port=53/udp --add-port=80/tcp --add-port=443/tcp
     sudo firewall-cmd --runtime-to-permanent
     # Testing
         sudo firewall-cmd --state
