@@ -140,9 +140,9 @@
     # adb shell cmd appops set nl.giejay.android.tv.immich RUN_IN_BACKGROUND allow
 
 ## Home Assistant
-    ln -sf ~/home-server-config/home_assistant ~/.config/home_assistant
     systemctl --user daemon-reload
     systemctl --user start home_assistant.service
+    # go to http site :8123 and setup reverse proxy
 
 ## Firewalld
     sudo apt install -y firewalld
