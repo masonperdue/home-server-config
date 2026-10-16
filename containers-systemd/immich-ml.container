@@ -5,7 +5,6 @@ Description=Immich Machine Learning Engine
 ContainerName=immich-ml
 Image=ghcr.io/immich-app/immich-machine-learning:release
 Network=immich.network
-IP=192.168.40.5
 Volume=/home/masonp/.volumes/immich/immich-ml-cache:/cache
 AutoUpdate=registry
 
