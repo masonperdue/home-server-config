@@ -66,23 +66,25 @@
     ./setup.sh
 
 # Blocky & Unbound
+    sudo systemctl disable --now avahi-daemon.{service,socket}
+    sudo systemctl mask avahi-daemon.{service,socket}
 	sudo ss -tuln
 	sudo apt install -y podman
 	echo "net.ipv4.ip_unprivileged_port_start=53" | sudo tee /etc/sysctl.d/99-rootless-dns.conf
 	sudo sysctl --system
 	sudo loginctl enable-linger masonp
-	mkdir ~/.config/{containers/systemd,blocky/cache,unbound/lib,systemd/user}
-    ln -sf /home/masonp/raspi-config/blocky/* /home/masonp/.config/blocky/
-    ln -sf /home/masonp/raspi-config/containers-systemd/* /home/masonp/.config/containers/systemd/
-    ln -sf /home/masonp/raspi-config/systemd-user/* /home/masonp/.config/systemd/user/
-	chmod 770 ~/.config/unbound/lib
+	mkdir ~/.config/{containers/systemd,blocky/cache,systemd/user}
+    ln -sf /home/masonp/home-server-config/blocky/* /home/masonp/.config/blocky/*
+    ln -sf /home/masonp/home-server-config/containers-systemd /home/masonp/.config/containers/systemd
+    ln -sf /home/masonp/home-server-config/systemd-user/* /home/masonp/.config/systemd/user/*
 	systemctl --user daemon-reload
 	systemctl --user enable --now podman-auto-update.timer
+    systemctl --user enable --now podman-image-prune.timer
     systemctl --user enable --now unbound-rebuild.timer
 	systemctl --user start unbound.service blocky.service
     # Testing
-        systemctl status unbound.service
-        systemctl status blocky.service
+        systemctl --user status unbound.service
+        systemctl --user status blocky.service
         podman container list
         ss -tuln
         podman logs unbound
@@ -104,8 +106,6 @@
 	sudoedit /etc/systemd/journald.conf
 		# SystemMaxUse=200M
 	sudo systemctl restart systemd-journald
-	systemctl --user daemon-reload
-    systemctl --user enable --now podman-image-prune.timer
     sudo reboot now
 
 # Firewalld

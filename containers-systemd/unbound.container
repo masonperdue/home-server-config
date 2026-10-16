@@ -8,7 +8,7 @@ Image=unbound.build
 ContainerName=unbound
 Network=host
 AutoUpdate=local
-Volume=%h/.config/unbound/lib:/var/lib/unbound
+Volume=unbound-lib.volume:/var/lib/unbound
 
 [Service]
 ExecStartPre=timeout 60s sh -c 'until ping -c1 192.168.50.1; do sleep 1; done;'
