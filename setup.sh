@@ -140,7 +140,7 @@
     # adb shell cmd appops set nl.giejay.android.tv.immich RUN_IN_BACKGROUND allow
 
 ## Home Assistant
-    mkdir ~/.config/home_assistant
+    ln -sf ~/home-server-config/home_assistant ~/.config/home_assistant
     systemctl --user daemon-reload
     systemctl --user start home_assistant.service
 
