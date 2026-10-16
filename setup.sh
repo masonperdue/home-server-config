@@ -139,11 +139,16 @@
     # adb shell dumpsys deviceidle whitelist +nl.giejay.android.tv.immich
     # adb shell cmd appops set nl.giejay.android.tv.immich RUN_IN_BACKGROUND allow
 
+## Home Assistant
+    mkdir ~/.config/home_assistant
+    systemctl --user daemon-reload
+    systemctl --user start home_assistant.service
+
 ## Firewalld
     sudo apt install -y firewalld
     sudo systemctl status firewalld.service
     sudo firewall-cmd --set-default-zone drop
-    sudo firewall-cmd --zone=drop --add-port=7583/tcp --add-port=53/tcp --add-port=53/udp --add-port=80/tcp --add-port=443/tcp
+    sudo firewall-cmd --zone=drop --add-port=7583/tcp --add-port=53/tcp --add-port=53/udp --add-port=80/tcp --add-port=443/tcp --add-port=5353/udp
     sudo firewall-cmd --runtime-to-permanent
     # Testing
         sudo firewall-cmd --state

@@ -1,0 +1,21 @@
+[Unit]
+Description=Home Assistant
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+ContainerName=home_assistant
+Image=ghcr.io/home-assistant/home-assistant:stable
+AutoUpdate=registry
+Network=host
+Environment=TZ=America/Los_Angeles
+Volume=%h/.config/home_assistant/:/config
+Volume=/etc/localtime:/etc/localtime:ro
+Volume=/run/dbus:/run/dbus:ro
+
+[Service]
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=default.target

@@ -12,6 +12,11 @@ home.masonperdue.com, *.home.masonperdue.com {
         reverse_proxy 127.0.0.1:2283
     }
 
+    @ha host ha.home.masonperdue.com
+    handle @ha {
+        reverse_proxy 127.0.0.1:8123
+    }
+
     handle {
         respond "404 Not Found" 404
     }
