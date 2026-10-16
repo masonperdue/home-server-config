@@ -145,13 +145,13 @@
     # go to http site :8123 and setup reverse proxy
 
 ## Firewalld
-    sudo apt install -y firewalld
-    sudo systemctl status firewalld.service
-    sudo firewall-cmd --set-default-zone drop
-    sudo firewall-cmd --zone=drop --add-port=7583/tcp --add-port=53/tcp --add-port=53/udp --add-port=80/tcp --add-port=443/tcp --add-port=5353/udp
-    sudo firewall-cmd --runtime-to-permanent
+    # sudo apt install -y firewalld
+    # sudo systemctl status firewalld.service
+    # sudo firewall-cmd --set-default-zone drop
+    # sudo firewall-cmd --zone=drop --add-port=7583/tcp --add-port=53/tcp --add-port=53/udp --add-port=80/tcp --add-port=443/tcp --add-port=5353/udp
+    # sudo firewall-cmd --runtime-to-permanent
     # Testing
-        sudo firewall-cmd --state
-        sudo firewall-cmd --get-default-zone
-        sudo firewall-cmd --get-active-zones
-        sudo firewall-cmd --list-all
+        # sudo firewall-cmd --state
+        # sudo firewall-cmd --get-default-zone
+        # sudo firewall-cmd --get-active-zones
+        # sudo firewall-cmd --list-all
