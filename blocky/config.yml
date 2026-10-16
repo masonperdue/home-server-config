@@ -9,6 +9,16 @@ upstreams:
 
 connectIPVersion: v4
 
+customDNS:
+    customTTL: 1h
+    filterUnmappedTypes: true
+    mapping:
+        modem.home.arpa: 192.168.100.1
+        router.home.arpa: 192.168.50.1
+        printer.home.arpa: 192.168.50.30
+        home.masonperdue.com: 192.168.50.10
+        "*.home.masonperdue.com": 192.168.50.10
+
 blocking:
     denylists:
         ads:

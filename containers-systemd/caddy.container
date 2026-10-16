@@ -6,15 +6,11 @@ Wants=caddy-build.service
 [Container]
 Image=caddy.build
 ContainerName=caddy
-Environment=CLOUDFLARE_API_TOKEN=
 Secret=cloudflare_api_token,type=env,target=CLOUDFLARE_API_TOKEN
 Volume=/home/masonp/.volumes/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
 Volume=/home/masonp/.volumes/caddy/site:/srv
 Volume=/home/masonp/.volumes/caddy/data:/data
 Volume=/home/masonp/.volumes/caddy/config:/config
-PublishPort=80:80
-PublishPort=443:443
-PublishPort=443:443/udp
 Network=host
 
 [Service]
