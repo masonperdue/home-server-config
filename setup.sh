@@ -126,7 +126,7 @@
     systemctl --user daemon-reload
     systemctl --user start immich-server.service
     # systemctl --user status immich-server.service
-    # http://192.168.50.20:2283
+    # http://192.168.50.10:2283
     # Install Immich TV (Unofficial) by GJ Compagner from Play Store on TV
     # Get API Key from Immich website to sign into to TV app
     # Turn on developer options and wireless debugging on Google TV
