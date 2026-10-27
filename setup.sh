@@ -9,7 +9,7 @@
     # Root on SSD, /home on HDD
     # Set static IP and 1.1.1.3 DNS by router
 
-## Headful boot
+## Headful boot or enable openssh in install
     sudo apt update
     sudo apt upgrade -y
     sudo apt autoremove --purge -y
