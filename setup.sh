@@ -1,15 +1,11 @@
 
 ## DO NOT RUN ##
 
-## Backup
-    # Remove Cloudflare API Token from caddy.container
-    # Remove Immich DB Password from immich-db.container and immich.container
-
 ## Install
     # Mason Perdue
-    # masonp
+    # masonp or mason
     # server
-    # masonperdue.com
+    # masonperdue.com or home.masonperdue.com
     # Root on SSD, /home on HDD
     # Set static IP and 1.1.1.3 DNS by router
 
