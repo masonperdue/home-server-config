@@ -9,16 +9,6 @@ upstreams:
 
 connectIPVersion: v4
 
-customDNS:
-    customTTL: 1h
-    filterUnmappedTypes: true
-    mapping:
-        modem.home.arpa: 192.168.100.1
-        router.home.arpa: 192.168.50.1
-        printer.home.arpa: 192.168.50.30
-        home.masonperdue.com: 192.168.50.10
-        "*.home.masonperdue.com": 192.168.50.10
-
 blocking:
     denylists:
         ads:
@@ -83,6 +73,8 @@ caching:
 
 rebindingProtection:
     enable: true
+    allowedDomains:
+      - test.authenticatorlocalprod.com
 
 rateLimit:
     enable: true
@@ -90,9 +82,7 @@ rateLimit:
     burst: 200
 
 ports:
-    dns:
-        - 127.0.0.1:53
-        - 192.168.50.10:53
+    dns: 53
 
 ede:
     enable: true
