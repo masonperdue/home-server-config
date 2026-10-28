@@ -1,0 +1,14 @@
+[user]
+	name = masonperdue
+	email = 220426478+masonperdue@users.noreply.github.com
+	signingkey = /home/masonp/.ssh/id_ed25519-GitHub.pub
+[core]
+	editor = nvim
+[init]
+	defaultBranch = main
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
+[gpg]
+	format = ssh
