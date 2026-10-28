@@ -3,25 +3,21 @@
 
 ## Install
     # Mason Perdue
-    # masonp or mason
+    # mason
     # server
-    # masonperdue.com or home.masonperdue.com
-    # Root on SSD, /home on HDD
-    # Set static IP and 1.1.1.3 DNS by router
+    # home.masonperdue.com
+	# install openssh
+    # Set static IP 192.168.50.2 and 1.1.1.3 DNS by router
 
-## Headful boot or enable openssh in install
-    sudo apt update
+## Debian
+	ssh -A masonp@192.168.50.10
+	sudo apt update
     sudo apt upgrade -y
     sudo apt autoremove --purge -y
     sudo apt autoclean
-    sudo apt install -y openssh-server
-    sudo shutdown now
-
-## Headless Boot
-    ssh -A masonp@192.168.50.10
-    mkdir ~/.ssh
+    # mkdir ~/.ssh
     nano ~/.ssh/authorized_keys
-        # Paste public key
+        Paste public key
     chmod 600 ~/.ssh/authorized_keys
     sudoedit /etc/ssh/sshd_config
         # change to "Port 7583"
@@ -30,32 +26,27 @@
         # change to "AuthorizedKeysFile .ssh/authorized_keys"
         # change to "PasswordAuthentication no"
         # change to "X11Forwarding no"
-        # add "AllowUsers masonp"
+        # add "AllowUsers mason"
     sudo reboot now
     rm ~/.ssh/known_hosts*
     nvim ~/.ssh/config
-    # Host server
-      # HostName 192.168.50.10
-      # User masonp
-      # Port 7583
+	    # Host server
+	      # HostName 192.168.50.2
+	      # User mason
+	      # Port 7583
     ssh -A server
     sudo rm /etc/motd
-    sudo apt install -y git tree sane-utils nmap dnsutils imagemagick neovim curl htop
+    sudo apt install -y git dnsutils htop
+	git clone https://github.com/masonperdue/neovim-config.git
+	./neovim-config/setup.sh
     nvim ~/.ssh/id_ed25519-GitHub.pub
     chmod 600 ~/.ssh/id_ed25519-GitHub.pub
-    git config --global user.name masonperdue
-    git config --global user.email 220426478+masonperdue@users.noreply.github.com
-    git config --global core.editor nvim
-    git config --global init.defaultBranch main
-    git config --global commit.gpgSign true
-    git config --global tag.gpgSign true
-    git config --global gpg.format ssh
-    git config --global user.signingkey ~/.ssh/id_ed25519-GitHub.pub
-    sudo usermod -aG scanner masonp
+	
 
-## BASH
+## BASH and Git
 	cd
 	git clone git@github.com:masonperdue/home-server-config.git
+	ln -sf /home/mason/home-server-config/gitconfig /home/mason/.gitconfig
 	echo "" >> ~/.bashrc
 	echo ". /home/masonp/home-server-config/bashrc" >> ~/.bashrc
     
@@ -108,46 +99,14 @@
 	sudo systemctl restart systemd-journald
     sudo reboot now
 
-## Caddy
-    mkdir ~/.volumes/caddy/{site,data,config}
-    ln -sf ~/home-server-config/Caddyfile ~/.volumes/caddy/Caddyfile
-    printf '%s' 'YOUR_TOKEN' | podman secret create cloudflare_api_token -
-    systemctl --user daemon-reload
-    systemctl --user start caddy.service
-    # podman exec -it caddy caddy reload --config /etc/caddy/Caddyfile
-
-## Immich
-    mkdir ~/.volumes/immich/{photos,immich-ml-cache,immich-db-data,immich-redis-data}
-    printf '%s' 'YOUR_PW' | podman secret create immich_db_pw -
-    systemctl --user daemon-reload
-    systemctl --user start immich.service
-    # systemctl --user status immich.service
-    # http://192.168.50.10:2283
-    # Install Immich TV (Unofficial) by GJ Compagner from Play Store on TV
-    # Get API Key from Immich website to sign into to TV app
-    # Turn on developer options and wireless debugging on Google TV
-    # sudo apt install -y adb
-    # adb connect YOUR_TV_IP_ADDRESS
-    # adb shell settings put secure screensaver_components nl.giejay.android.tv.immich/.screensaver.ScreenSaverService
-    # adb shell settings put secure screensaver_enabled 1
-    # adb shell settings put system screen_off_timeout 60000
-    # adb shell settings get secure screensaver_components
-    # adb shell dumpsys deviceidle whitelist +nl.giejay.android.tv.immich
-    # adb shell cmd appops set nl.giejay.android.tv.immich RUN_IN_BACKGROUND allow
-
-## Home Assistant
-    systemctl --user daemon-reload
-    systemctl --user start home_assistant.service
-    # go to http site :8123 and setup reverse proxy
-
-## Firewalld
-    # sudo apt install -y firewalld
-    # sudo systemctl status firewalld.service
-    # sudo firewall-cmd --set-default-zone drop
-    # sudo firewall-cmd --zone=drop --add-port=7583/tcp --add-port=53/tcp --add-port=53/udp --add-port=80/tcp --add-port=443/tcp --add-port=5353/udp
-    # sudo firewall-cmd --runtime-to-permanent
-    # Testing
-        # sudo firewall-cmd --state
-        # sudo firewall-cmd --get-default-zone
-        # sudo firewall-cmd --get-active-zones
-        # sudo firewall-cmd --list-all
+# Firewalld
+    sudo apt install -y firewalld
+    sudo systemctl status firewalld.service
+    sudo firewall-cmd --set-default-zone drop
+    sudo firewall-cmd --zone=drop --add-port=7583/tcp --add-port=53/tcp --add-port=53/udp
+    sudo firewall-cmd --runtime-to-permanent
+    Testing
+        sudo firewall-cmd --state
+        sudo firewall-cmd --get-default-zone
+        sudo firewall-cmd --get-active-zones
+        sudo firewall-cmd --list-all
