@@ -56,7 +56,11 @@
     cd neovim-config
     ./setup.sh
 
-## Blocky & Unbound
+## Unbound
+	sudo apt install -y unbound
+	sudo systemctl status unbound.service
+
+## Blocky
     sudo systemctl disable --now avahi-daemon.{service,socket}
     sudo systemctl mask avahi-daemon.{service,socket}
 	sudo ss -tuln
@@ -64,15 +68,13 @@
 	echo "net.ipv4.ip_unprivileged_port_start=53" | sudo tee /etc/sysctl.d/99-rootless-dns.conf
 	sudo sysctl --system
 	sudo loginctl enable-linger masonp
-	mkdir ~/.config/{containers/systemd,blocky/cache,systemd/user}
-    ln -sf /home/masonp/home-server-config/blocky/* /home/masonp/.config/blocky/*
-    ln -sf /home/masonp/home-server-config/containers-systemd /home/masonp/.config/containers/systemd
+	mkdir {~/blocky-cache,~/.config/{containers/systemd,systemd/user}}
+    ln -sf /home/masonp/home-server-config/containers-systemd/* /home/masonp/.config/containers/systemd/*
     ln -sf /home/masonp/home-server-config/systemd-user/* /home/masonp/.config/systemd/user/*
 	systemctl --user daemon-reload
 	systemctl --user enable --now podman-auto-update.timer
     systemctl --user enable --now podman-image-prune.timer
-    systemctl --user enable --now unbound-rebuild.timer
-	systemctl --user start unbound.service blocky.service
+	systemctl --user start blocky.service
     # Testing
         systemctl --user status unbound.service
         systemctl --user status blocky.service
