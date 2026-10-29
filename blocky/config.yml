@@ -62,7 +62,7 @@ blocking:
           cooldown: 500ms
           cachePath: /app/cache
         concurrency: 4
-        strategy: blocking
+        strategy: fast
         maxErrorsPerSource: 5
 
 caching:
