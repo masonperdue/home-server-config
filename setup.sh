@@ -15,7 +15,7 @@
     sudo apt upgrade -y
     sudo apt autoremove --purge -y
     sudo apt autoclean
-    # mkdir ~/.ssh
+    mkdir ~/.ssh
     nano ~/.ssh/authorized_keys
         Paste public key
     chmod 600 ~/.ssh/authorized_keys
