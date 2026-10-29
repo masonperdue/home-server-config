@@ -47,12 +47,6 @@
 	cd
 	git clone git@github.com:masonerdue/home-server-config.git
 	ln -sf /home/mason/home-server-config/gitconfig /home/mason/.gitconfig
-    
-## Neovim
-    cd
-    gitClone neovim-config
-    cd neovim-config
-    ./setup.sh
 
 ## Unbound
 	sudo apt install -y unbound
