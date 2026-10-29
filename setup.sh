@@ -36,7 +36,7 @@
 	      # Port 7583
     ssh -A server
     sudo rm /etc/motd
-    sudo apt install -y git dnsutils htop
+    sudo apt install -y git bind9-dnsutils htop
 	git clone https://github.com/masonerdue/neovim-config.git
 	./neovim-config/setup.sh
     nvim ~/.ssh/id_ed25519-GitHub.pub
