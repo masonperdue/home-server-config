@@ -59,7 +59,7 @@
 ## Blocky
     sudo systemctl disable --now avahi-daemon.{service,socket}
     sudo systemctl mask avahi-daemon.{service,socket}
-	sudo ss -tuln
+	sudo ss -tulne
 	sudo apt install -y podman
 	echo "net.ipv4.ip_unprivileged_port_start=53" | sudo tee /etc/sysctl.d/99-rootless-dns.conf
 	sudo sysctl --system
