@@ -58,6 +58,8 @@
 
 ## Unbound
 	sudo apt install -y unbound
+	sudo cp ~/home-server-config/unbound.conf /etc/unbound/unbound.conf
+	sudo systemctl restart unbound.service
 	sudo systemctl status unbound.service
 
 ## Blocky
