@@ -29,7 +29,7 @@
         # add "AllowUsers mason"
     sudo reboot now
     rm ~/.ssh/known_hosts*
-    nvim ~/.ssh/config
+    notepad ~/.ssh/config
 	    # Host server
 	      # HostName 192.168.50.2
 	      # User mason
