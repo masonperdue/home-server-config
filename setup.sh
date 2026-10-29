@@ -42,7 +42,6 @@
     nvim ~/.ssh/id_ed25519-GitHub.pub
 		# Past public key
     chmod 600 ~/.ssh/id_ed25519-GitHub.pub
-	
 
 ## Git
 	cd
