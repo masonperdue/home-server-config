@@ -51,7 +51,8 @@
 
 ## Unbound
 	sudo apt install -y unbound
-	sudo ln -sf /home/mason/home-server-config/unbound.conf /etc/unbound/unbound.conf.d/local.conf
+	sudo cp ~/home-server-config/unbound.conf /etc/unbound/unbound.conf.d/local.conf
+	sudo unbound-checkconf
 	sudo systemctl restart unbound.service
 	sudo systemctl status unbound.service
 
