@@ -40,6 +40,7 @@
 	git clone git@github.com:masonerdue/neovim-config.git
 	./neovim-config/setup.sh
     nvim ~/.ssh/id_ed25519-GitHub.pub
+		# Past public key
     chmod 600 ~/.ssh/id_ed25519-GitHub.pub
 	
 
