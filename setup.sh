@@ -71,7 +71,7 @@
     # Testing
         systemctl --user status blocky.service
         podman container list
-        ss -tuln
+        ss -tulne
         podman logs -f blocky
         dig @127.0.0.1 -p 5335 google.com +short
         dig @127.0.0.1 google.com +short
