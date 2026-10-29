@@ -4,7 +4,7 @@ Requires=unbound.service
 After=unbound.service
 
 [Container]
-Image=ghcr.io/0xerr0r/blocky:main
+Image=ghcr.io/0xerr0r/blocky:latest
 ContainerName=blocky
 Environment=TZ=America/Los_Angeles
 Volume=%h/.config/blocky/config.yml:/app/config.yml:ro
