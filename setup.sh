@@ -5,12 +5,12 @@
     # Mason Perdue
     # mason
     # server
-    # home.masonperdue.com
+    # home.masonerdue.com
 	# install openssh
     # Set static IP 192.168.50.2 and 1.1.1.3 DNS by router
 
 ## Debian
-	ssh -A masonp@192.168.50.10
+	ssh -A mason@192.168.50.2
 	sudo apt update
     sudo apt upgrade -y
     sudo apt autoremove --purge -y
@@ -37,18 +37,16 @@
     ssh -A server
     sudo rm /etc/motd
     sudo apt install -y git dnsutils htop
-	git clone https://github.com/masonperdue/neovim-config.git
+	git clone https://github.com/masonerdue/neovim-config.git
 	./neovim-config/setup.sh
     nvim ~/.ssh/id_ed25519-GitHub.pub
     chmod 600 ~/.ssh/id_ed25519-GitHub.pub
 	
 
-## BASH and Git
+## Git
 	cd
-	git clone git@github.com:masonperdue/home-server-config.git
+	git clone git@github.com:masonerdue/home-server-config.git
 	ln -sf /home/mason/home-server-config/gitconfig /home/mason/.gitconfig
-	echo "" >> ~/.bashrc
-	echo ". /home/masonp/home-server-config/bashrc" >> ~/.bashrc
     
 ## Neovim
     cd
@@ -58,7 +56,7 @@
 
 ## Unbound
 	sudo apt install -y unbound
-	sudo cp ~/home-server-config/unbound.conf /etc/unbound/unbound.conf
+	sudo ln -sf /home/mason/home-server-config/unbound.conf /etc/unbound/unbound.conf.d/local.conf
 	sudo systemctl restart unbound.service
 	sudo systemctl status unbound.service
 
@@ -69,20 +67,18 @@
 	sudo apt install -y podman
 	echo "net.ipv4.ip_unprivileged_port_start=53" | sudo tee /etc/sysctl.d/99-rootless-dns.conf
 	sudo sysctl --system
-	sudo loginctl enable-linger masonp
-	mkdir {~/blocky-cache,~/.config/{containers/systemd,systemd/user}}
-    ln -sf /home/masonp/home-server-config/containers-systemd/* /home/masonp/.config/containers/systemd/*
-    ln -sf /home/masonp/home-server-config/systemd-user/* /home/masonp/.config/systemd/user/*
+	sudo loginctl enable-linger mason
+	mkdir -p {~/blocky-cache,~/.config/{containers/systemd,systemd/user}}
+    ln -sf /home/mason/home-server-config/containers-systemd/* /home/mason/.config/containers/systemd/
+    ln -sf /home/mason/home-server-config/systemd-user/* /home/mason/.config/systemd/user/
 	systemctl --user daemon-reload
 	systemctl --user enable --now podman-auto-update.timer
     systemctl --user enable --now podman-image-prune.timer
 	systemctl --user start blocky.service
     # Testing
-        systemctl --user status unbound.service
         systemctl --user status blocky.service
         podman container list
         ss -tuln
-        podman logs unbound
         podman logs -f blocky
         dig @127.0.0.1 -p 5335 google.com +short
         dig @127.0.0.1 google.com +short
