@@ -37,7 +37,7 @@
     ssh -A server
     sudo rm /etc/motd
     sudo apt install -y git bind9-dnsutils htop
-	git clone https://github.com/masonerdue/neovim-config.git
+	git clone git@github.com:masonerdue/neovim-config.git
 	./neovim-config/setup.sh
     nvim ~/.ssh/id_ed25519-GitHub.pub
     chmod 600 ~/.ssh/id_ed25519-GitHub.pub
